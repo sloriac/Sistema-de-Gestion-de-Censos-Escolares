@@ -32,19 +32,21 @@
 
     <main>
         <div class="container py-4">
-            <form>
+            <form novalidate>
 
                 
                 <div class="row g-3 mb-3">
                     <div class="col-12 col-md-8">
-                        <label for="nombre-formulario" class="form-label ">Nombre del formulario <span class="badge bg-secondary">Obligatorio</span></label>
-                        <input type="text" class="form-control is-invalid" id="nombre-formulario" placeholder="Escriba el nombre del formulario" required>
-                        <div class="invalid-feedback"><p class="mb-0">El nombre del formulario es obligatorio.</p></div>
+                        <label for="nombre-formulario" class="form-label">Nombre del Formulario</label>
+                        <input type="text" class="form-control" id="nombre-formulario" placeholder="Escriba el nombre del formulario" required>
+                        <div class="invalid-feedback" id="error-nombre-formulario"></div>
                     </div>
                 </div>
 
                 <div class="row mb-3">
                     <div class="col-12">
+
+                        <!--Seccion 1-->
                         <div class="accordion" id="acordion-secciones">
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
@@ -54,38 +56,20 @@
                                 <div id="seccion1" class="accordion-collapse collapse show">
                                     <div class="accordion-body">
                                         <fieldset>
-                                            <legend class="visually-hidden">Informacion del centro</legend>
-                                            <div class="row g-3 align-items-end">
-                                                <div class="col-12 col-md-6 col-lg-4">
-                                                    <!--Nombre del centro-->
-                                                    <label for="nombre-centro" class="form-label">Nombre del Centro Educativo</label>
-                                                    <input type="text" class="form-control" id="nombre-centro" placeholder="Escriba el nombre del Centro Educativo">
-                                                </div>
-                                                <div class="col-12 col-md-6 col-lg-4">
-                                                    <!--Codigo institucional-->
-                                                    <label for="codigo-institucional" class="form-label ">Codigo Institucional</label>
-                                                    <div class="input-group">
-                                                        <span class="input-group-text">#</span>
-                                                        <input type="text" class="form-control" id="codigo-institucional" placeholder="Escriba el codigo institucional">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 col-md-6 col-lg-4">
-                                                    <!--Director-->
-                                                    <div class="form-floating">
-                                                        <input type="text" class="form-control" id="nombre-director" placeholder="Escriba el nombre del director">
-                                                        <label for="nombre-director">Nombre del Director</label>
-                                                    </div>
-                                                </div>
+                                            <legend class="visually-hidden">Informacion del Centro</legend>
+                                            <div class="row g-3">
                                                 <div class="col-12">
+                                                    <ul class="list-group mb-3" id="lista-campos-1"></ul>
                                                     <!--Agregar campo-->
-                                                    <button type="button" class="btn btn-primary">+ Agregar Campo</button>
+                                                    <button type="button" class="btn btn-primary btn-agregar-campo" data-seccion-id="1">+ Agregar Campo</button>
                                                 </div>
                                             </div>
                                         </fieldset>
                                     </div>
                                 </div>
                             </div>
-                  
+
+                            <!--Seccion 2-->
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#seccion2"
@@ -96,31 +80,10 @@
                                         <fieldset>
                                             <legend class="visually-hidden">Matricula</legend>
                                             <div class="row g-3">
-                                                <div class="col-12 col-md-6 col-lg-4">
-                                                    <!--Nombre del centro-->
-                                                    <label for="cantidad-estudiantes" class="form-label ">Cantidad de estudiantes</label>
-                                                    <input type="number" class="form-control" id="cantidad-estudiantes"  placeholder="Digite la cantidad de estudiantes">
-                                                </div>
-                                                <div class="col-12 col-md-6 col-lg-4">
-                                                    <!--Codigo institucional-->
-                                                    <label for="nivel-educativo" class="form-label ">Nivel educativo</label>
-                                                    <select class="form-select" id="nivel-educativo">
-                                                        <option value="">Seleccione un nivel</option>
-                                                        <option>Preescolar</option>
-                                                        <option>I Ciclo</option>
-                                                        <option>II Ciclo</option>
-                                                        <option>III Ciclo</option>
-                                                        <option>Educacion Diversificada</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-12 col-md-6 col-lg-4">
-                                                    <!--Director-->
-                                                    <label for="cantidad-grupos" class="form-label">Cantidad de grupos</label>
-                                                    <input type="number" class="form-control" id="cantidad-grupos" placeholder="Digite la cantidad de grupos">
-                                                </div>
                                                 <div class="col-12">
+                                                    <ul class="list-group mb-3" id="lista-campos-2"></ul>
                                                     <!--Agregar campo-->
-                                                    <button type="button" class="btn btn-primary">+ Agregar Campo</button>
+                                                    <button type="button" class="btn btn-primary btn-agregar-campo" data-seccion-id="2">+ Agregar Campo</button>
                                                 </div>
                                             </div>
                                         </fieldset>
@@ -132,13 +95,16 @@
                 </div>
 
                 <div class="row g-3 mb-3">
-                    <div class="col-12">
-                        <div class="form-check form-switch">
+                    <div class="col-6">
+                        <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="guardar-plantilla">
-                            <label class="form-check-label" for="guardar-plantilla">
-                            Guardar plantilla
+                            <label class="form-check-label" for="flexCheckDefault">
+                            Guardar Plantilla
                             </label>
                         </div>
+                    </div>
+                    <div class="col-6">
+                        <button type="button" class="btn btn-primary">+ Agregar Seccion</button>
                     </div>
                 </div>
 
@@ -151,19 +117,66 @@
                     </div>
                 </div>
             </form>
-            <div class="alert alert-info mt-3" role="alert">
-                <p class="mb-0">Complete las secciones y presione "Continuar".</p>
-            </div>
         </div>
     </main>
+
+    <div class="modal fade" id="modal-campo" tabindex="-1" aria-labelledby="titulo-modal-campo" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="titulo-modal-campo">Agregar Campo</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="nombre-campo" class="form-label">Nombre del campo</label>
+                        <input type="text" class="form-control" id="nombre-campo" placeholder="Ejemplo: Cantidad de estudiantes" aria-describedby="error-nombre-campo">
+                        <div class="invalid-feedback" id="error-nombre-campo"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tipo-campo" class="form-label" >Tipo de dato</label>
+                        <select class="form-select" id="tipo-campo" aria-describedby="error-tipo-campo">
+                            <option value="">Seleccione un tipo</option>
+                            <option value="texto">Texto</option>
+                            <option value="numero">Numero</option>
+                            <option value="fecha">Fecha</option>
+                            <option value="seleccion">Seleccion</option>
+                        </select>
+                        <div class="invalid-feedback" id="error-tipo-campo"></div>
+                    </div>
+                    <fieldset class="mb-3">
+                        <legend class="form-label fs-6">Obligatorio</legend>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="obligatorio" id="obligatorio-si" value="si">
+                            <label for="obligatorio-si" class="form-check-label">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="obligatorio" id="obligatorio-no" value="no">
+                            <label for="obligatorio-no" class="form-check-label">No</label>
+                        </div>
+                        <div class="invalid-feedback d-block" id="error-obligatorio"></div>
+                    </fieldset>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btn-confirmar-campo">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <template id="plantilla-campo">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="nombre-campo"></span>
+            <span>
+                <span class="badge text-bg-secondary tipo-campo"></span>
+                <span class="badge text-bg-warning obligatorio-campo"></span>
+            </span>
+        </li>
+    </template>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="js/rf-01.js"></script>
 
 </body>
 </html>
-
-<!--Mil disculpas por entregarlo tiempo despues de la hora indicada,
-queria realizar el ejercicio de la mejor manera posible para comprender
-y aprender mas sobre bootstrap y perdi mucho tiempo depurando y corrigiendo 
-errores, quedo atento a cualquier retroalimentacion sobre mi trabajo, saludos
- y de nuevo disculpas por entregar el trabajo a destiempo.-->

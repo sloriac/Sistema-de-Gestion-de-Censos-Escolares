@@ -2,3 +2,7 @@
     height: 60px;
     width: auto;
 }
+
+.mensaje-error {
+    color: rojo;
+}
