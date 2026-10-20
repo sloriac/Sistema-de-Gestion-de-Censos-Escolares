@@ -1,0 +1,64 @@
+/* Import necesario para la fuente Inter*/
+@import url('https://googleapis.com');
+
+:root {
+    /* Colores para las partes de las paginas*/
+    --color-primario: #1B4F8F;
+    --color-secundario: #00796B;
+    --color-fondo: #F5F7FA;
+    --superficie: #FFFFFF;
+    --color-texto: #1F2933;
+    --texto-secundario: #5F6B7A;
+    --color-exito: #2E7D32;
+    --color-advertencia: #B45309;
+    --color-error: #C62828;
+    --color-informacion: #0277BD;
+    --radio-borde: 8px;
+    --espaciado-base: 8px;
+
+    /* Colores para el estado de los censos*/
+    --borrador: #5F6B7A;
+    --recibido: #0277BD;
+    --en-proceso: #1B4F8F;
+    --con-observaciones: #B45309;
+    --aprobado: #2E7D32;
+    --rechazado: #C62828;
+
+    /* Tipografia*/
+    font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+html {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+body, p {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+label {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.texto-ayuda, .nota {
+    font-size: 0.8125rem;
+    font-weight: 400;
+}
