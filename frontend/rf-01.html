@@ -11,7 +11,8 @@
     <link href="css/rf-01.css" rel="stylesheet">
 
 </head>
-<body>
+
+<body> 
 
     <header>
         <div class="container">
@@ -106,7 +107,9 @@
                         </div>
                     </div>
                     <div class="col-auto">
-                        <button type="button" class="btn btn-primary">+ Agregar Sección</button>
+                        <ul class="list-group mb-3" id="lista-secciones-1"></ul>
+                        <!--Agregar seccion-->
+                        <button type="button" class="btn btn-primary" id="btn-agregar-seccion">+ Agregar Sección</button>
                     </div>
                 </div>
 
@@ -176,8 +179,37 @@
             </span>
         </li>
     </template>
+
+    <div class="modal fade" id="modal-seccion" tabindex="-1" aria-labelledby="titulo-modal-seccion" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="titulo-modal-seccion">Agregar Seccion</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="nombre-seccion" class="form-label">Nombre de la seccion</label>
+                        <input type="text" class="form-control" id="nombre-seccion" placeholder="Ejemplo: Oferta Academica" aria-describedby="error-nombre-seccion">
+                        <div class="invalid-feedback" id="error-nombre-seccion"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btn-confirmar-seccion">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <template id="plantilla-seccion">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="nombre-seccion"></span>
+        </li>
+    </template>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    
     <script src="js/rf-01.js"></script>
 
 </body>

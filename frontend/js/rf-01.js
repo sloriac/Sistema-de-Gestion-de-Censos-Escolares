@@ -5,6 +5,9 @@ const inputObligatorioCampoSi = document.getElementById("obligatorio-si");
 const inputObligatorioCampoNo = document.getElementById("obligatorio-no");
 const inputEsPlantilla = document.getElementById("guardar-plantilla");
 const inputAgregarCampo = document.getElementById("btn-confirmar-campo");
+const inputAgregarSeccion = document.getElementById("btn-confirmar-seccion");
+const inputNombreSeccion = document.getElementById("nombre-seccion");
+const botonAgregarSeccion = document.getElementById("btn-agregar-seccion");
 
 const NOMBRES_TIPO = {texto: 'Texto', numero: 'Número', fecha: 'Fecha', seleccion: 'Selección'}
 
@@ -28,6 +31,7 @@ const formulario = {
 
 let seccionActivaId = null;
 const modalCampo = new bootstrap.Modal(document.getElementById('modal-campo'));
+const modalSeccion = new bootstrap.Modal(document.getElementById('modal-seccion'));
 
 //Crea los campos de una seccion usando el template
 function crearCampos(seccion) {
@@ -38,6 +42,17 @@ function crearCampos(seccion) {
         copia.querySelector('.nombre-campo').textContent = campo.nombre;
         copia.querySelector('.tipo-campo').textContent = campo.tipo;
         copia.querySelector('.obligatorio-campo').textContent = campo.obligatorio ? 'Obligatorio' : 'Opcional';
+
+        lista.appendChild(copia);
+    });
+}
+
+function crearSecciones(formulario) {
+    const lista = document.getElementById('lista-secciones-' + formulario.seccion);
+    lista.replaceChildren();
+    formulario.secciones.forEach((seccion) => {
+        const copia = document.getElementById('plantilla-seeccion').content.cloneNode(true);
+        copia.querySelector('.nombre-seccion').textContent = seccion.nombreSeccion;
 
         lista.appendChild(copia);
     });
@@ -65,6 +80,14 @@ function validarTipoCampo(tipo) {
 
 function validarObligatorio(marcado) {
     if (marcado === null) {return 'Seleccione una de las 2 opciones, Si o No'}
+    return '';
+}
+
+function validarNombreSeccion(nombreSeccion, formulario) {
+    if (nombreSeccion === '') {return 'Escriba el nombre de la seccion. Ejemplo: Oferta Educativa';}
+    if (nombreSeccion.length < 5) {return 'El nombre debe tener al menos 5 caracteres';}
+    const repetido = formulario.seccion.some((s) => s.nombre.toLowerCase() === nombreSeccion.toLowerCase());
+    if (repetido) {return 'Ya existe una seccion con ese nombre en el formulario.';}
     return '';
 }
 
@@ -200,4 +223,34 @@ document.getElementById('btn-continuar').addEventListener('click', () => {
     if (error) {return;}
 
     alert('Formulario validado correctamente')
+});
+
+botonAgregarSeccion.addEventListener('click', () => {
+
+    //Limpiar el formulario
+    inputNombreSeccion.value = '';
+
+    //Limpia los campos del modal y los errores
+    inputNombreSeccion.classList.remove('is-valid');
+    inputNombreSeccion.classList.remove('is-invalid');
+
+    modalSeccion.show();
+});
+
+//Cuando se presiona agregar en el modal
+inputAgregarSeccion.addEventListener('click', () => {
+    const seccion = formulario.secciones.find((s) => s.id === seccionActivaId);
+
+    const nombre = inputNombreSeccion.value.trim();
+
+    const errorNombre = validarNombreCampo(nombreSeccion, formulario);
+
+    if (errorNombre !== '') {resaltarError(inputNombreSeccion, errorNombre);}
+    else {resaltarExito(inputNombreSeccion);}
+
+    if(errorNombre !== '') return;
+
+    formulario.secciones.push({nombre});
+    crearSecciones(seccion);
+    modalSeccion.hide();
 });
