@@ -1,0 +1,68 @@
+/* Estilos de la pantalla RF-11 */
+
+.logo-mep {
+    max-width: 200px;
+    max-height: 55px;
+    width: auto;
+    height: auto;
+}
+
+.navbar-brand {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+    color: #000000;
+}
+
+main h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.card {
+    border-radius: 5px;
+    border-color: #D6D6D6;
+}
+
+.card-header {
+    background-color: #F7F7F7;
+    padding: 10px 15px;
+}
+
+.card-body {
+    padding: 16px;
+}
+
+.form-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.texto-ayuda {
+    font-size: 0.8125rem;
+    color: #5F6B7A;
+}
+
+.form-control:read-only {
+    background-color: #FFFFFF;
+}
+
+#mensaje {
+    margin-top: 15px;
+}
+
+@media (max-width: 576px) {
+    .navbar-brand {
+        font-size: 0.85rem;
+    }
+
+    .logo-mep {
+        max-width: 110px;
+        max-height: 40px;
+    }
+
+    main {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+}
