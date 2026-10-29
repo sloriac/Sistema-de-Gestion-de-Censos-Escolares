@@ -62,3 +62,8 @@ label {
     font-size: 0.8125rem;
     font-weight: 400;
 }
+
+.logo-mep {
+    height: 60px;
+    width: auto;
+}
