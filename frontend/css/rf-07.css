@@ -1,0 +1,190 @@
+
+body {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+
+.btn-primary {
+    --bs-btn-bg: var(--color-primario);
+    --bs-btn-border-color: var(--color-primario);
+    --bs-btn-hover-bg: #163F73;
+    --bs-btn-hover-border-color: #163F73;
+    --bs-btn-active-bg: #12345F;
+    --bs-btn-active-border-color: #12345F;
+    --bs-btn-disabled-bg: var(--color-primario);
+    --bs-btn-disabled-border-color: var(--color-primario);
+    --bs-btn-border-radius: var(--radio-borde);
+}
+
+.btn-success {
+    --bs-btn-bg: var(--color-exito);
+    --bs-btn-border-color: var(--color-exito);
+    --bs-btn-hover-bg: #246428;
+    --bs-btn-hover-border-color: #246428;
+    --bs-btn-active-bg: #1D5121;
+    --bs-btn-active-border-color: #1D5121;
+    --bs-btn-disabled-bg: var(--color-exito);
+    --bs-btn-disabled-border-color: var(--color-exito);
+    --bs-btn-border-radius: var(--radio-borde);
+}
+
+.btn-danger {
+    --bs-btn-bg: var(--color-error);
+    --bs-btn-border-color: var(--color-error);
+    --bs-btn-hover-bg: #A32222;
+    --bs-btn-hover-border-color: #A32222;
+    --bs-btn-active-bg: #8A1C1C;
+    --bs-btn-active-border-color: #8A1C1C;
+    --bs-btn-disabled-bg: var(--color-error);
+    --bs-btn-disabled-border-color: var(--color-error);
+    --bs-btn-border-radius: var(--radio-borde);
+}
+
+.btn-outline-primary {
+    --bs-btn-color: var(--color-primario);
+    --bs-btn-border-color: var(--color-primario);
+    --bs-btn-hover-bg: var(--color-primario);
+    --bs-btn-hover-border-color: var(--color-primario);
+    --bs-btn-active-bg: var(--color-primario);
+    --bs-btn-active-border-color: var(--color-primario);
+    --bs-btn-border-radius: var(--radio-borde);
+}
+
+.btn-link {
+    --bs-btn-color: var(--color-primario);
+    --bs-btn-hover-color: #163F73;
+}
+
+.form-control,
+.form-select,
+.card,
+.list-group,
+.modal-content {
+    border-radius: var(--radio-borde);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 0.2rem rgba(27, 79, 143, 0.2);
+}
+
+/* ===== Encabezado ===== */
+.logo-mep {
+    height: 60px;
+    width: auto;
+}
+
+.rol-tecnico {
+    background-color: var(--color-primario);
+    color: #fff;
+    font-weight: 500;
+}
+
+/* ===== Menú lateral ===== */
+.menu-lateral .list-group-item.active {
+    background-color: var(--color-primario);
+    border-color: var(--color-primario);
+}
+
+.menu-lateral .list-group-item-action:hover:not(.active) {
+    background-color: var(--color-fondo);
+}
+
+/* ===== Insignias de estado (colores de la guía de estilos) ===== */
+.estado-pendiente {
+    background-color: var(--borrador);
+    color: #fff;
+}
+
+.estado-en-proceso {
+    background-color: var(--en-proceso);
+    color: #fff;
+}
+
+.estado-completado {
+    background-color: var(--aprobado);
+    color: #fff;
+}
+
+.punto-estado {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+/* ===== Barras de progreso ===== */
+.progress {
+    height: 22px;
+    border-radius: var(--radio-borde);
+    background-color: #E4E8EE;
+}
+
+.progress-bar {
+    background-color: var(--color-primario);
+    transition: width 0.4s ease;
+}
+
+/* ===== Dashboard ===== */
+.cifra-resumen {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+/* ===== Lista de censos ===== */
+.tabla-scroll {
+    max-height: 480px;
+    overflow: auto;
+    border: 1px solid var(--bs-border-color);
+    border-radius: var(--radio-borde);
+}
+
+.tabla-scroll thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #E4E8EE;
+}
+
+.col-codigo {
+    font-variant-numeric: tabular-nums;
+    color: var(--texto-secundario);
+}
+
+/* ===== Detalle del centro ===== */
+.detalle-centro {
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.campo-detalle {
+    background-color: var(--color-fondo);
+    border: 1px solid var(--bs-border-color);
+    border-radius: var(--radio-borde);
+    padding: 0.5rem 0.875rem;
+}
+
+.alerta-rechazo {
+    border-left: 4px solid var(--con-observaciones);
+    background-color: #FFF4E5;
+    border-radius: var(--radio-borde);
+    padding: 0.625rem 0.875rem;
+    font-size: 0.875rem;
+}
+
+.notificacion-enviada {
+    border-left: 4px solid var(--color-error);
+    background-color: #FDECEC;
+}
+
+/* ===== Modal ver censo ===== */
+.seccion-completa {
+    color: var(--color-exito);
+    font-weight: 600;
+}
+
+.seccion-pendiente {
+    color: var(--texto-secundario);
+}

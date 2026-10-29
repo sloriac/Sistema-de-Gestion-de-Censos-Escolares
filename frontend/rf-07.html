@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SICEN|Seguimiento de Censos</title>
+
+    <!--Enlaces a hojas de estilo en cascada-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilos-generales.css">
+    <link href="css/rf-07.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <nav class="navbar navbar-expand-lg bg-light w-100 px-3 py-2 justify-content-between" data-bs-theme="light">
+                <div>
+                    <figure class="m-0">
+                        <img src="assets/logo-mep.png" alt="Logotipo del Ministerio de Educacion Publica" class="logo-mep">
+                    </figure>
+                </div>
+                <div>
+                    <h1 class="navbar-brand"> SICEN | Seguimiento de Censos</h1>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <a href="#/inicio" class="nav-link">Inicio</a>
+                    <span class="badge rol-tecnico">Técnico de la DAE</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container py-4">
+            <div class="row g-3">
+
+                <!--Menu lateral-->
+                <aside class="col-12 col-md-3 col-lg-2">
+                    <nav class="list-group menu-lateral" aria-label="Menú principal">
+                        <a href="#/inicio" class="list-group-item list-group-item-action" data-vista="inicio">Inicio</a>
+                        <a href="#/censos" class="list-group-item list-group-item-action" data-vista="censos">Censos</a>
+                        <a href="#/reportes" class="list-group-item list-group-item-action" data-vista="reportes">Reportes</a>
+                    </nav>
+                    <button type="button" class="btn btn-link text-decoration-none mt-3 px-0" id="btn-cerrar-sesion">Cerrar sesión</button>
+                </aside>
+
+                <div class="col-12 col-md-9 col-lg-10">
+
+                    <!--VISTA 1: Inicio (resumen de centros asignados)-->
+                    <section id="vista-inicio" class="vista" hidden>
+                        <h2 class="mb-3">Centros asignados</h2>
+                        <div class="card col-lg-8">
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush mb-3">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span>Total asignados</span>
+                                        <span class="cifra-resumen" id="resumen-total">0</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span class="d-flex align-items-center gap-2"><span class="punto-estado estado-completado"></span>Completados</span>
+                                        <span class="cifra-resumen" id="resumen-completado">0</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span class="d-flex align-items-center gap-2"><span class="punto-estado estado-en-proceso"></span>En proceso</span>
+                                        <span class="cifra-resumen" id="resumen-en-proceso">0</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span class="d-flex align-items-center gap-2"><span class="punto-estado estado-pendiente"></span>Pendientes</span>
+                                        <span class="cifra-resumen" id="resumen-pendiente">0</span>
+                                    </li>
+                                </ul>
+
+                                <p class="form-label mb-1">Avance</p>
+                                <div class="progress" role="progressbar" aria-label="Avance general de censos" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="progreso-general">
+                                    <div class="progress-bar" id="barra-general">0%</div>
+                                </div>
+
+                                <div class="text-center mt-4">
+                                    <a href="#/censos" class="btn btn-primary">Ver centros</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!--VISTA 2: Censos asignados-->
+                    <section id="vista-censos" class="vista" hidden>
+                        <h2 class="mb-3">Censos asignados</h2>
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="row g-2 align-items-center mb-3">
+                                    <div class="col-auto">
+                                        <label for="buscador" class="col-form-label">Buscar centro:</label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="search" class="form-control" id="buscador" placeholder="Nombre o código del centro">
+                                    </div>
+                                    <div class="col-auto">
+                                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#panel-filtros"
+                                        aria-expanded="false" aria-controls="panel-filtros">Filtros</button>
+                                    </div>
+                                </div>
+
+                                <div class="collapse" id="panel-filtros">
+                                    <div class="row g-2 align-items-center mb-3 p-3 bg-light rounded">
+                                        <div class="col-auto">
+                                            <label for="filtro-estado" class="col-form-label">Estado del censo</label>
+                                        </div>
+                                        <div class="col-12 col-sm-4">
+                                            <select class="form-select" id="filtro-estado">
+                                                <option value="todos">Todos</option>
+                                                <option value="pendiente">Pendiente</option>
+                                                <option value="en_proceso">En proceso</option>
+                                                <option value="completado">Completado</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-auto">
+                                            <button type="button" class="btn btn-outline-secondary" id="btn-limpiar-filtros">Limpiar</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tabla-scroll">
+                                    <table class="table table-hover align-middle mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Centro</th>
+                                                <th scope="col">Código</th>
+                                                <th scope="col">Estado</th>
+                                                <th scope="col">Acción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbody-censos"></tbody>
+                                    </table>
+                                    <p class="text-center text-secondary py-4 mb-0" id="sin-resultados" hidden>No hay censos que coincidan con la búsqueda.</p>
+                                </div>
+
+                                <p class="nota mt-3 mb-0">
+                                    <span id="contador-resultados"></span>
+                                    · <button type="button" class="btn btn-link btn-sm p-0 align-baseline" id="btn-demo-no-asignado">Demo: intentar aprobar un centro NO asignado</button>
+                                    · <button type="button" class="btn btn-link btn-sm p-0 align-baseline" id="btn-reiniciar">Reiniciar datos de prueba</button>
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!--VISTA 3: Detalle del centro educativo-->
+                    <section id="vista-centro" class="vista" hidden>
+                        <a href="#/censos" class="btn btn-link px-0 mb-2">&larr; Volver a censos asignados</a>
+
+                        <div class="alert alert-danger" role="alert" id="aviso-no-asignado" hidden>
+                            <strong>Acceso no permitido.</strong> El centro educativo solicitado no existe o no está asignado a usted.
+                        </div>
+
+                        <div id="contenido-centro">
+                            <h2 class="mb-3" id="titulo-centro"></h2>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="detalle-centro d-grid gap-3">
+
+                                        <div class="campo-detalle"><span class="text-secondary">Código:</span> <strong id="detalle-codigo"></strong></div>
+                                        <div class="campo-detalle"><span class="text-secondary">Director:</span> <strong id="detalle-director"></strong></div>
+                                        <div class="campo-detalle"><span class="text-secondary">Estado:</span> <span class="badge" id="detalle-estado"></span></div>
+
+                                        <div>
+                                            <div class="d-flex justify-content-between mb-1">
+                                                <span class="form-label mb-0">Progreso</span>
+                                                <strong id="detalle-porcentaje"></strong>
+                                            </div>
+                                            <div class="progress" role="progressbar" aria-label="Progreso del censo" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="detalle-progreso">
+                                                <div class="progress-bar" id="detalle-barra"></div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <span class="form-label mb-1 d-block">Última actualización</span>
+                                            <div class="campo-detalle" id="detalle-fecha"></div>
+                                        </div>
+
+                                        <div class="alerta-rechazo" id="detalle-motivo" hidden></div>
+
+                                        <div>
+                                            <button type="button" class="btn btn-primary" id="btn-ver-censo">Ver censo</button>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between gap-2">
+                                            <button type="button" class="btn btn-danger" id="btn-rechazar">Rechazar</button>
+                                            <button type="button" class="btn btn-success" id="btn-aprobar">Aprobar</button>
+                                        </div>
+                                        <p class="texto-ayuda nota mb-0" id="detalle-ayuda" hidden></p>
+
+                                        <div id="bloque-notificaciones" hidden>
+                                            <h3 class="fs-6">Notificaciones enviadas al director</h3>
+                                            <ul class="list-group" id="lista-notificaciones"></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!--Reportes (fuera del alcance del RF-07)-->
+                    <section id="vista-reportes" class="vista" hidden>
+                        <h2 class="mb-3">Reportes</h2>
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="nota mb-0">Este módulo no forma parte del avance del RF-07.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!--Modal: rechazar censo (criterio de aceptacion 2)-->
+    <div class="modal fade" id="modal-rechazo" tabindex="-1" aria-labelledby="titulo-modal-rechazo" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="titulo-modal-rechazo">Rechazar censo</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="texto-ayuda nota" id="texto-modal-rechazo"></p>
+                    <div class="mb-3">
+                        <label for="motivo-rechazo" class="form-label">Motivo del rechazo</label>
+                        <textarea class="form-control" id="motivo-rechazo" rows="4" maxlength="500" placeholder="Indique al director qué debe corregir" aria-describedby="error-motivo-rechazo"></textarea>
+                        <div class="invalid-feedback" id="error-motivo-rechazo"></div>
+                        <div class="text-end texto-ayuda nota" id="contador-motivo">0 / 500</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="btn-confirmar-rechazo">Rechazar y notificar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal: confirmar aprobacion (criterio de aceptacion 3)-->
+    <div class="modal fade" id="modal-aprobar" tabindex="-1" aria-labelledby="titulo-modal-aprobar" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="titulo-modal-aprobar">Aprobar censo</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-0" id="texto-modal-aprobar"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-success" id="btn-confirmar-aprobar">Aprobar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal: ver censo-->
+    <div class="modal fade" id="modal-censo" tabindex="-1" aria-labelledby="titulo-modal-censo" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="titulo-modal-censo">Censo del centro</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="nota" id="texto-modal-censo"></p>
+                    <ul class="list-group" id="lista-secciones-censo"></ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Mensajes emergentes-->
+    <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x p-3">
+        <div class="toast align-items-center border-0" id="toast-mensaje" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body" id="toast-texto"></div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+            </div>
+        </div>
+    </div>
+
+    <!--Plantillas-->
+    <template id="plantilla-censo">
+        <tr>
+            <td class="centro-nombre"></td>
+            <td class="col-codigo centro-codigo"></td>
+            <td><span class="badge centro-estado"></span></td>
+            <td><a class="btn btn-primary btn-sm centro-ver" href="#">Ver</a></td>
+        </tr>
+    </template>
+
+    <template id="plantilla-notificacion">
+        <li class="list-group-item notificacion-enviada">
+            <strong class="notificacion-director"></strong>
+            <div class="notificacion-motivo"></div>
+            <small class="text-secondary notificacion-fecha"></small>
+        </li>
+    </template>
+
+    <template id="plantilla-seccion-censo">
+        <li class="list-group-item d-flex justify-content-between">
+            <span class="seccion-nombre"></span>
+            <span class="seccion-estado"></span>
+        </li>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    <script src="js/rf-07.js"></script>
+
+</body>
+</html>
