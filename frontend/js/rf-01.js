@@ -40,22 +40,29 @@ function crearCampos(seccion) {
     seccion.campos.forEach((campo) => {
         const copia = document.getElementById('plantilla-campo').content.cloneNode(true);
         copia.querySelector('.nombre-campo').textContent = campo.nombre;
-        copia.querySelector('.tipo-campo').textContent = campo.tipo;
+        copia.querySelector('.tipo-campo').textContent = NOMBRES_TIPO[campo.tipo]
         copia.querySelector('.obligatorio-campo').textContent = campo.obligatorio ? 'Obligatorio' : 'Opcional';
 
         lista.appendChild(copia);
     });
 }
 
-function crearSecciones(formulario) {
-    const lista = document.getElementById('lista-secciones-' + formulario.seccion);
-    lista.replaceChildren();
-    formulario.secciones.forEach((seccion) => {
-        const copia = document.getElementById('plantilla-seeccion').content.cloneNode(true);
-        copia.querySelector('.nombre-seccion').textContent = seccion.nombreSeccion;
+function dibujarSeccion(seccion) {
+    const copia = document.getElementById('plantilla-seccion').content.cloneNode(true);
 
-        lista.appendChild(copia);
-    });
+    const boton = copia.querySelector('.boton-seccion');
+    const panel = copia.querySelector('.panel-seccion');
+
+    panel.id = 'seccion' + seccion.id;
+    boton.dataset.bsTarget = '#seccion' + seccion.id;
+    boton.setAttribute('aria-controls', 'seccion' + seccion.id);
+    boton.textContent = `${seccion.id}. ${seccion.nombre}`;
+
+    copia.querySelector('.leyenda-seccion').textContent = seccion.nombre;
+    copia.querySelector('.lista-campos').id = 'lista-campos-' + seccion.id;
+    copia.querySelector('.btn-agregar-campo').dataset.seccionId = seccion.id;
+
+    document.getElementById('acordion-secciones').appendChild(copia);
 }
 
 //Funciones de validacion
@@ -86,13 +93,13 @@ function validarObligatorio(marcado) {
 function validarNombreSeccion(nombreSeccion, formulario) {
     if (nombreSeccion === '') {return 'Escriba el nombre de la seccion. Ejemplo: Oferta Educativa';}
     if (nombreSeccion.length < 5) {return 'El nombre debe tener al menos 5 caracteres';}
-    const repetido = formulario.seccion.some((s) => s.nombre.toLowerCase() === nombreSeccion.toLowerCase());
+    const repetido = formulario.secciones.some((s) => s.nombre.toLowerCase() === nombreSeccion.toLowerCase());
     if (repetido) {return 'Ya existe una seccion con ese nombre en el formulario.';}
     return '';
 }
 
 function validarSecciones(secciones) {
-    if (secciones.length === 0) {return 'Las secciones no pueden estar vacias, llenelas con al menos un campo';}
+    if (secciones.length === 0) {return 'Debe haber al menos una seccion';}
     return '';
 }
 
@@ -132,6 +139,35 @@ function resaltarExito(campo) {
     campo.classList.remove('is-invalid');
     campo.classList.add('is-valid');
     document.getElementById('error-' + campo.id).textContent = '';
+}
+
+function validarFormulario() {
+    const errores = [];
+
+    const errorNombreFormulario = validarNombreFormulario(inputNombreFormulario.value.trim());
+    if (errorNombreFormulario !== '') {
+        resaltarError(inputNombreFormulario, errorNombreFormulario);
+        errores.push(errorNombreFormulario);
+    } else {resaltarExito(inputNombreFormulario);}
+
+    const errorSecciones = validarSecciones(formulario.secciones);
+    if (errorSecciones !== '') {errores.push(errorSecciones);}
+
+    for (const seccion of formulario.secciones) {
+        const errorCampos = validarCampos(seccion.campos);
+        if (errorCampos !== '') {errores.push(`Seccion "${seccion.nombre}": ${errorCampos}`);}
+    }
+    return errores;
+}
+
+function mostrarErrores(errores) {
+    const lista = document.getElementById('total-errores');
+    lista.replaceChildren();
+    errores.forEach((mensaje) => {
+        const item = document.createElement('li');
+        item.textContent = mensaje;
+        lista.appendChild(item);
+    });
 }
 
 //Escuchador para cuando se presione el "Agregar Campo"
@@ -188,42 +224,20 @@ inputAgregarCampo.addEventListener('click', () => {
 });
 
 //Cuando se presiona continuar
-document.getElementById('btn-continuar').addEventListener('click', () => {
-    let error = false //Asumimos que no hay errores
+const mensajeExito = document.getElementById('mensaje-exito');
 
-    //Validar el nombre del formulario
-    const nombreFormulario = inputNombreFormulario.value.trim();
-    const errorNombreFormulario = validarNombreFormulario(nombreFormulario);
+document.querySelector('form').addEventListener('submit', (evento) => {
+    evento.preventDefault();
+    mensajeExito.classList.add('d-none');
 
-    if (errorNombreFormulario !== '') {
-        resaltarError(inputNombreFormulario, errorNombreFormulario);
-        error = true;
-    } else {
-        resaltarExito(inputNombreFormulario);
-        formulario.nombre = nombreFormulario;        
-    }
+    const errores = validarFormulario();
+    mostrarErrores(errores);
+    if (errores.length > 0) {return;}
 
-    //Validar secciones 
-    const errorSecciones = validarSecciones(formulario.secciones);
-    if (errorSecciones !== '') {
-        document.getElementById('error-secciones').textContent = errorSecciones;
-        error = true;
-    } else {document.getElementById('error-secciones').textContent = '';}
-
-    //Validar los campos de cada seccion
-    for (const seccion of formulario.secciones) {
-        const errorCampos = validarCampos(seccion.campos);
-        if (errorCampos !== '') {
-            document.getElementById('error-secciones').textContent = errorCampos;
-            error = true;
-            break;    
-        }
-    }
-
-    if (error) {return;}
-
-    alert('Formulario validado correctamente')
-});
+    formulario.nombre = inputNombreFormulario.value.trim();
+    mensajeExito.textContent = 'La estructura del formulario es valida.';
+    mensajeExito.classList.remove('d-none');
+})
 
 botonAgregarSeccion.addEventListener('click', () => {
 
@@ -233,24 +247,45 @@ botonAgregarSeccion.addEventListener('click', () => {
     //Limpia los campos del modal y los errores
     inputNombreSeccion.classList.remove('is-valid');
     inputNombreSeccion.classList.remove('is-invalid');
+    document.getElementById('error-nombre-seccion').textContent = '';
 
     modalSeccion.show();
 });
 
+let siguienteIdSeccion = 3;
 //Cuando se presiona agregar en el modal
 inputAgregarSeccion.addEventListener('click', () => {
-    const seccion = formulario.secciones.find((s) => s.id === seccionActivaId);
 
     const nombre = inputNombreSeccion.value.trim();
+    const errorNombre = validarNombreSeccion(nombre, formulario);
 
-    const errorNombre = validarNombreCampo(nombreSeccion, formulario);
-
-    if (errorNombre !== '') {resaltarError(inputNombreSeccion, errorNombre);}
+    if (errorNombre !== '') {
+        resaltarError(inputNombreSeccion, errorNombre)
+        return;}
     else {resaltarExito(inputNombreSeccion);}
 
-    if(errorNombre !== '') return;
+    const nuevaSeccion = {id: siguienteIdSeccion++, nombre, campos: []};
+    formulario.secciones.push(nuevaSeccion);
+    dibujarSeccion(nuevaSeccion);
 
-    formulario.secciones.push({nombre});
-    crearSecciones(seccion);
     modalSeccion.hide();
 });
+
+//Estructura del formulario que se enviara al backend
+function obtenerEstructura() {
+    return {
+        nombre: formulario.nombre,
+        esPlantilla: formulario.esPlantilla,
+        estado: 'borrador',
+        secciones: formulario.secciones.map((s) => ({
+            nombre: s.nombre,
+            campos: s.campos.map((c) => ({
+                etiqueta: c.nombre,
+                tipoDato: c.tipo,
+                obligatorio: c.obligatorio
+            }))
+        }))
+    }
+}
+
+//TO-DO: Borrar secciones o campos en caso de equivocarse
