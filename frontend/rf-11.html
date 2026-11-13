@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SICEN | Completar Formulario Censal</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Estilos generales y propios -->
+    <link rel="stylesheet" href="css/estilos-generales.css">
+    <link rel="stylesheet" href="css/rf-11.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <nav class="navbar navbar-expand-lg bg-light w-100 px-3 py-2 justify-content-between"
+                 data-bs-theme="light">
+
+                <div>
+                    <figure class="m-0">
+                        <img src="assets/logo-mep.png"
+                             alt="Logotipo del Ministerio de Educación Pública"
+                             class="logo-mep">
+                    </figure>
+                </div>
+
+                <div>
+                    <h1 class="navbar-brand">Formulario Censal</h1>
+                </div>
+
+                <div>
+                    <button type="button" class="btn btn-primary" id="btn-volver">
+                        Volver
+                    </button>
+                </div>
+
+            </nav>
+        </div>
+    </header>
+
+    <main class="container py-4">
+
+        <h2>Completar formulario censal</h2>
+
+        <p>Complete la información solicitada para el período censal vigente.</p>
+
+        <div id="estado-periodo" class="alert alert-success">
+            Período censal activo. Puede completar el formulario.
+        </div>
+
+        <div id="mensaje" class="alert d-none" role="alert"></div>
+
+        <form id="formulario-censal" novalidate>
+
+            <div class="card mb-4">
+
+                <div class="card-header">
+                    Información del centro educativo
+                </div>
+
+                <div class="card-body">
+
+                    <div class="mb-3">
+                        <label for="nombre-centro" class="form-label">
+                            Nombre del centro educativo
+                        </label>
+
+                        <input type="text"
+                               class="form-control"
+                               id="nombre-centro"
+                               value="Centro educativo de ejemplo"
+                               readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="codigo-centro" class="form-label">
+                            Código del centro educativo
+                        </label>
+
+                        <input type="text"
+                               class="form-control"
+                               id="codigo-centro"
+                               value="0000"
+                               readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="oferta-educativa" class="form-label">
+                            Oferta educativa autorizada
+                        </label>
+
+                        <input type="text"
+                               class="form-control"
+                               id="oferta-educativa"
+                               value="Primaria"
+                               readonly>
+                    </div>
+
+                    <p class="texto-ayuda mb-0">
+                        Esta información es de solo lectura y no se puede modificar.
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="card mb-4">
+
+                <div class="card-header">
+                    Información de matrícula
+                </div>
+
+                <div class="card-body">
+
+                    <p class="texto-ayuda">
+                        Campos provisionales de demostración. Deben confirmarse
+                        con los campos oficiales del formulario censal.
+                    </p>
+
+                    <div class="mb-3">
+                        <label for="cantidad-estudiantes" class="form-label">
+                            Cantidad de estudiantes
+                        </label>
+
+                        <input type="number"
+                               class="form-control"
+                               id="cantidad-estudiantes"
+                               min="0"
+                               step="1"
+                               required>
+
+                        <div class="invalid-feedback">
+                            Ingrese una cantidad de estudiantes igual o mayor que cero.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="cantidad-secciones" class="form-label">
+                            Cantidad de secciones
+                        </label>
+
+                        <input type="number"
+                               class="form-control"
+                               id="cantidad-secciones"
+                               min="0"
+                               step="1"
+                               required>
+
+                        <div class="invalid-feedback">
+                            Ingrese una cantidad de secciones igual o mayor que cero.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="observaciones" class="form-label">
+                            Observaciones
+                        </label>
+
+                        <textarea class="form-control"
+                                  id="observaciones"
+                                  rows="3"
+                                  placeholder="Escriba alguna observación si corresponde."></textarea>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2">
+
+                <button type="button" class="btn btn-secondary" id="btn-borrador">
+                    Guardar borrador
+                </button>
+
+                <button type="submit" class="btn btn-primary" id="btn-enviar">
+                    Enviar formulario
+                </button>
+
+            </div>
+
+        </form>
+
+    </main>
+
+    <script src="js/rf-11.js"></script>
+
+</body>
+</html>

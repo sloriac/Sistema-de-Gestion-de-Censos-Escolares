@@ -1,0 +1,14 @@
+/* Colores de los estados del formulario (variables en estilos-generales.css) */
+.estado-pendiente {
+    background-color: var(--con-observaciones);
+    color: #FFFFFF;
+}
+
+.estado-aprobado {
+    background-color: var(--aprobado);
+    color: #FFFFFF;
+}
+
+.marca-campo {
+    color: var(--color-exito);
+}

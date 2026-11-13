@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SICEN | Periodos Censales</title>
+
+    <!--Enlaces a hojas de estilo en cascada-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilos-generales.css">
+    <link href="css/rf-03.css" rel="stylesheet">
+
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav class="navbar navbar-expand-lg bg-light w-100 px-3 py-2 justify-content-between" data-bs-theme="light">                
+                <div>
+                    <figure class="m-0">
+                        <img src="assets/logo-mep.png" alt="Logotipo del Ministerio de Educacion Publica" class="logo-mep">
+                    </figure>
+                </div>
+                <div>
+                    <h1 class="navbar-brand">Configuración de Período Censal</h1>
+                </div>
+                <div>
+                    <button id="btn-volver" type="button" class="btn btn-primary">Volver</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container py-4">
+            <!--p para los mensajes de resultado-->
+            <p class="alert d-none" role="alert" id="mensaje-resultado"></p>
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <form id="formulario-periodo" novalidate class="mb-3">
+                        <div class="row mb-3">
+                            <label for="formulario" class="form-label">Formulario</label>
+                            <select id="formulario" class="form-select">
+                                <option value="">Seleccione un formulario</option>
+                            </select>
+                            <p class="invalid-feedback" id="error-formulario"></p>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="fecha-apertura" class="form-label">Fecha de apertura</label>
+                            <input type="date" id="fecha-apertura" class="form-control">
+                            <p class="invalid-feedback" id="error-fecha-apertura"></p>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="fecha-cierre" class="form-label">Fecha de cierre</label>
+                            <input type="date" id="fecha-cierre" class="form-control">
+                            <p class="invalid-feedback" id="error-fecha-cierre"></p>
+                        </div>
+                        <div class="row mb-3">
+                            <!--Contiene el estado del censo-->
+                            <p>Estado: <span class="badge" id="estado-periodo"></span></p>
+                        </div>
+                        <div class="d-grid d-md-block text-center">
+                            <button type="submit" class="btn btn-primary">Guardar Periodo</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <section>
+                <h2>Periodos programados</h2>
+                <div id="calendario"></div>
+            </section>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="js/rf-03.js"></script>
+    
+</body>
+</html>
