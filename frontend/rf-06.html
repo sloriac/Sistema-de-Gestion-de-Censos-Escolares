@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SICEN | Reportes Estadisticos - Jefatura DAE</title>
+
+    <!--Enlaces a hojas de estilo en cascada-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilos-generales.css">
+    <link href="css/rf-06.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <nav class="navbar navbar-expand-lg bg-light w-100 px-3 py-2 justify-content-between" data-bs-theme="light">                
+                <div>
+                    <figure class="m-0">
+                        <img src="assets/logo-mep.png" alt="Logotipo del Ministerio de Educacion Publica" class="logo-mep">
+                    </figure>
+                </div>
+                <div>
+                    <h1 class="navbar-brand">Reportes estadisticos</h1>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-primary">Volver</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container py-4">
+            <p class="alert d-none" role="alert" id="mensaje-resultado"></p>
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <form id="formulario-reportes" novalidate class="mb-3">
+
+                        <div class="row mb-3">
+                            <label for="periodo" class="form-label">Periodo</label>
+                            <select id="periodo" class="form-select">
+                                <option value="">Seleccione un Periodo</option>
+                            </select>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="region" class="form-label">Region</label>
+                            <select id="region" class="form-select">
+                                <option value="">Seleccione una Region</option>
+                            </select>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="estado" class="form-label">Estado</label>
+                            <select id="estado" class="form-select">
+                                <option value="">Seleccione un Estado</option>
+                            </select>
+                        </div>
+
+                        <div class="row mb-3">
+                            <button type="submit" class="btn btn-primary" id="btn-generarreporte">Generar Reporte</button>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </main>
+    
+</body>
+</html>
