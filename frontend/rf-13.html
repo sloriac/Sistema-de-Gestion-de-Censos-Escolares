@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SICEN | Consulta de Censos</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="css/estilos-generales.css">
+    <link rel="stylesheet" href="css/rf-13.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <nav class="navbar navbar-expand-lg bg-light w-100 px-3 py-2 justify-content-between"
+                 data-bs-theme="light">
+
+                <div>
+                    <figure class="m-0">
+                        <img src="assets/logo-mep.png"
+                             alt="Logotipo del Ministerio de Educación Pública"
+                             class="logo-mep">
+                    </figure>
+                </div>
+
+                <div>
+                    <h1 class="navbar-brand">Consulta de Censos</h1>
+                </div>
+
+                <div>
+                    <button type="button" class="btn btn-primary" id="btn-volver">
+                        Volver
+                    </button>
+                </div>
+
+            </nav>
+        </div>
+    </header>
+
+    <main class="container py-4">
+
+        <h2>Estado de los censos enviados</h2>
+
+        <p>
+            Consulte el estado de los censos enviados y revise las
+            observaciones registradas.
+        </p>
+
+        <div id="notificacion" class="alert alert-warning d-none" role="alert">
+        </div>
+
+        <div class="card mb-4">
+
+            <div class="card-header">
+                Historial de censos
+            </div>
+
+            <div class="card-body">
+
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+
+                        <thead>
+                            <tr>
+                                <th>Período</th>
+                                <th>Fecha de envío</th>
+                                <th>Estado</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="lista-censos">
+                        </tbody>
+
+                    </table>
+                </div>
+
+                <p class="texto-ayuda mb-0">
+                    Los registros mostrados son datos de ejemplo para
+                    demostrar el funcionamiento del frontend.
+                </p>
+
+            </div>
+        </div>
+
+        <div id="detalle-censo" class="card d-none">
+
+            <div class="card-header">
+                Detalle del censo
+            </div>
+
+            <div class="card-body">
+
+                <h3 id="detalle-periodo"></h3>
+
+                <p>
+                    <strong>Estado:</strong>
+                    <span id="detalle-estado"></span>
+                </p>
+
+                <div id="detalle-observaciones" class="alert alert-warning d-none">
+                    <h4>Observaciones del Técnico de la DAE</h4>
+
+                    <p id="motivo-observaciones" class="mb-0"></p>
+                </div>
+
+                <p id="mensaje-detalle" class="texto-ayuda"></p>
+
+                <button type="button"
+                        class="btn btn-secondary"
+                        id="btn-cerrar-detalle">
+                    Cerrar detalle
+                </button>
+
+            </div>
+        </div>
+
+    </main>
+
+    <script src="js/rf-13.js"></script>
+
+</body>
+</html>
