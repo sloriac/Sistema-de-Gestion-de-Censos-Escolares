@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,80 +29,74 @@
             </div>
         </div>
     </header>
-    <div class="container py-4">
-        <div class="row">
-            <div class="col-2">
-                <nav class="navbar navbar-expand-lg bg-light w-100 px-3 py-2 justify-content-between" data-bs-theme="light">
-                    <ul class="nav flex-column list-unstyled">
-                        <li class="nav-item">
-                            <a href="">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="">Formularios</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="">Periodos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="">Usuarios</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="">Reportes</a>
-                        </li>    
-                        <div class="mt-5">
-                            <li class="nav-item">
-                                <a href="">Cerrar Sesion</a>
-                            </li>
+
+    <main>
+         <div class="container py-4">
+            <div class="row">
+                <div class="col-2">
+                    <nav class="navbar navbar-expand-lg bg-light w-100 px-3 py-2 justify-content-between" data-bs-theme="light">
+                        <ul class="nav flex-column list-unstyled">
+                            <li class="nav-item"><a href="">Inicio</a></li>
+                            <li class="nav-item"><a href="">Formularios</a></li>
+                            <li class="nav-item"><a href="">Periodos</a></li>
+                            <li class="nav-item"><a href="">Usuarios</a></li>
+                            <li class="nav-item"><a href="">Reportes</a></li>    
+                            <li class="nav-item mt-5"><a href="">Cerrar Sesión</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-md-10">
+                    <div class="row d-flex justify-content-around">
+                        <div class="col-4">
+                            <p class="d-flex align-items-center justify-content-center flex-column"><span id="total-centros"></span>Centros</p>
                         </div>
-                    </ul>
-                </nav>
-            </div>
-        <div class="col-md-10">
-            <div class="row d-flex justify-content-around">
-                <div class="col-4">
-                    <p class="d-flex align-items-center justify-content-center">850 Centros</p>
-                </div>
-                <div class="col-4">
-                    <p class="d-flex align-items-center justify-content-center">620 Completados</p>
-                </div>
-                <div class="col-4">
-                    <p class="d-flex align-items-center justify-content-center">180 Pendientes</p>
-                </div>
-                <div class="row">
-                    <div class="progress">
-                          <div class="progress-bar bg-info" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="col-4">
+                            <p class="d-flex align-items-center justify-content-center flex-column"><span id="total-completados"></span>Completados</p>
+                        </div>
+                        <div class="col-4">
+                            <p class="d-flex align-items-center justify-content-center flex-column"><span id="total-pendientes"></span>Pendientes</p>
+                        </div>
+                        <div class="col-12">
+                            <p>Avance nacional <span id="porcentaje-avance"></span>%</p>
+                            <div class="progress">
+                                <div id="barra-avance" class="progress-bar bg-primary" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-hover align-middle">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>Estado</th>
+                                            <th>Cantidad</th>
+                                            <th>Porcentaje</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tabla-estados">
+                                        <tr>
+                                            <td>Completado</td>
+                                            <td>620</td>
+                                            <td>73%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>En Proceso</td>
+                                            <td>150</td>
+                                            <td>18%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Pendiente</td>
+                                            <td>80</td>
+                                            <td>9%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>   
+                        </div>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table table-stripped table-hover align-middle">
-                            <thead class="table-dark">
-                                <tr>
-                                    <th>Estado</th>
-                                    <th>Cantidad</th>
-                                    <th>Porcentaje</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Completado</td>
-                                    <td>620</td>
-                                    <td>73%</td>
-                                </tr>
-                                <tr>
-                                    <td>En Proceso</td>
-                                    <td>150</td>
-                                    <td>18%</td>
-                                </tr>
-                                <tr>
-                                    <td>Pendiente</td>
-                                    <td>80</td>
-                                    <td>9%</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>   
                 </div>
             </div>
         </div>
-    </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="js/rf-05.js"></script>
 </body>
 </html>
