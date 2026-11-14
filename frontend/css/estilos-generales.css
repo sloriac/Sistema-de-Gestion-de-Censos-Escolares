@@ -1,5 +1,5 @@
 /* Import necesario para la fuente Inter*/
-@import url('https://googleapis.com');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
     /* Colores para las partes de las paginas*/
@@ -23,9 +23,6 @@
     --con-observaciones: #B45309;
     --aprobado: #2E7D32;
     --rechazado: #C62828;
-
-    /* Tipografia*/
-    font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 html {
@@ -49,6 +46,8 @@ h3 {
 }
 
 body, p {
+    /* Tipografia*/
+    font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     font-size: 1rem;
     font-weight: 400;
 }
