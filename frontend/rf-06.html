@@ -74,10 +74,13 @@
                 <hr>
 
                 <h2>Resultados</h2>
+                <p class="alert" role="status" id="estado-datos"></p>
+                <p class="text-muted">Generado: <span id="fecha-generado"></span></p>
                 <div class="row">
                     <div class="col-12 col-md-6">
                         <p class="d-flex justify-content-between">Centros registrados: <span id="centros-registrados"></span></p>
                         <p class="d-flex justify-content-between">Censos completados: <span id="censos-completados"></span></p>
+                        <p class="d-flex justify-content-between">Censos en proceso: <span id="censos-en-proceso"></span></p>
                         <p class="d-flex justify-content-between">Censos pendientes: <span id="censos-pendientes"></span></p>
                         <p class="d-flex justify-content-between">Censos con observaciones: <span id="censos-observaciones"></span></p>
                     </div>
@@ -86,11 +89,32 @@
                         <button type="button" class="btn btn-primary" id="btn-descargar-pdf">Descargar PDF</button>
                     </div>
                 </div>
+
+                <div class="table-responsive mt-3">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Período</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Centros</th>
+                                <th scope="col">Aprobados</th>
+                                <th scope="col">En proceso</th>
+                                <th scope="col">Pendientes</th>
+                                <th scope="col">Con observaciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-reporte"></tbody>
+                    </table>
+                </div>
             </section>
         </div>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <!--Librerías para exportar el reporte (Excel y PDF)-->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.4/dist/jspdf.plugin.autotable.min.js"></script>
     <script src="js/rf-06.js"></script>
     
 </body>
