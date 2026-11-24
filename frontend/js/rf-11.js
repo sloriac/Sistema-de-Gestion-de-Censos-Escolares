@@ -9,9 +9,13 @@ const botonVolver = document.getElementById('btn-volver');
 
 const estadoPeriodo = document.getElementById('estado-periodo');
 const mensaje = document.getElementById('mensaje');
+const estadoBorrador = document.getElementById('estado-borrador');
 
 // Cambiar a false para probar un período inactivo.
 let periodoActivo = true;
+
+// Clave utilizada para guardar el borrador en el navegador.
+const claveBorrador = 'sicen_rf11_borrador';
 
 function mostrarMensaje(texto, tipo) {
     mensaje.textContent = texto;
@@ -39,15 +43,99 @@ function actualizarPeriodo() {
             'Período censal activo. Puede completar el formulario.';
 
         estadoPeriodo.className = 'alert alert-success';
+
+        cantidadEstudiantes.readOnly = false;
+        cantidadSecciones.readOnly = false;
+        observaciones.readOnly = false;
+
         botonBorrador.disabled = false;
         botonEnviar.disabled = false;
     } else {
         estadoPeriodo.textContent =
-            'El período censal está inactivo. No se puede enviar el formulario.';
+            'El período censal está inactivo. Puede consultar el borrador, pero no modificarlo.';
 
         estadoPeriodo.className = 'alert alert-danger';
+
+        cantidadEstudiantes.readOnly = true;
+        cantidadSecciones.readOnly = true;
+        observaciones.readOnly = true;
+
         botonBorrador.disabled = true;
         botonEnviar.disabled = true;
+    }
+}
+
+function guardarBorrador() {
+    if (!periodoActivo) {
+        mostrarMensaje(
+            'No se puede modificar el borrador porque el período está inactivo.',
+            'danger'
+        );
+        return;
+    }
+
+    const datosBorrador = {
+        cantidadEstudiantes: cantidadEstudiantes.value,
+        cantidadSecciones: cantidadSecciones.value,
+        observaciones: observaciones.value,
+        fechaGuardado: new Date().toLocaleString()
+    };
+
+    try {
+        localStorage.setItem(
+            claveBorrador,
+            JSON.stringify(datosBorrador)
+        );
+
+        estadoBorrador.textContent =
+            'Borrador guardado el ' + datosBorrador.fechaGuardado;
+
+        estadoBorrador.className = 'alert alert-info';
+
+        mostrarMensaje(
+            'El borrador se guardó correctamente. Puede continuar después.',
+            'success'
+        );
+    } catch (error) {
+        mostrarMensaje(
+            'No fue posible guardar el borrador en este navegador.',
+            'danger'
+        );
+    }
+}
+
+function recuperarBorrador() {
+    try {
+        const borradorGuardado = localStorage.getItem(claveBorrador);
+
+        if (borradorGuardado !== null) {
+            const datosBorrador = JSON.parse(borradorGuardado);
+
+            cantidadEstudiantes.value =
+                datosBorrador.cantidadEstudiantes;
+
+            cantidadSecciones.value =
+                datosBorrador.cantidadSecciones;
+
+            observaciones.value =
+                datosBorrador.observaciones;
+
+            estadoBorrador.textContent =
+                'Se recuperó un borrador guardado anteriormente. Fecha: ' +
+                datosBorrador.fechaGuardado;
+
+            estadoBorrador.className = 'alert alert-info';
+
+            mostrarMensaje(
+                'Se recuperaron los datos del borrador.',
+                'success'
+            );
+        }
+    } catch (error) {
+        mostrarMensaje(
+            'No fue posible recuperar el borrador guardado.',
+            'danger'
+        );
     }
 }
 
@@ -67,24 +155,14 @@ cantidadSecciones.addEventListener('input', function () {
     }
 });
 
-botonBorrador.addEventListener('click', function () {
-    if (!periodoActivo) {
-        mostrarMensaje('El período censal está inactivo.', 'danger');
-        return;
-    }
-
-    mostrarMensaje(
-        'Borrador de demostración. Los datos no se guardaron permanentemente.',
-        'info'
-    );
-});
+botonBorrador.addEventListener('click', guardarBorrador);
 
 formulario.addEventListener('submit', function (evento) {
     evento.preventDefault();
 
     if (!periodoActivo) {
         mostrarMensaje(
-            'No se puede enviar el formulario porque el período censal está inactivo.',
+            'No se puede enviar el formulario porque el período está inactivo.',
             'danger'
         );
         return;
@@ -102,7 +180,7 @@ formulario.addEventListener('submit', function (evento) {
     }
 
     mostrarMensaje(
-        'Formulario validado correctamente. El envío es una demostración; no se guardaron datos ni se enviaron notificaciones reales.',
+        'Formulario validado correctamente. El envío es una demostración; todavía no se conecta con el backend.',
         'success'
     );
 });
@@ -111,4 +189,7 @@ botonVolver.addEventListener('click', function () {
     window.history.back();
 });
 
+// Al abrir la página, primero recupera el borrador
+// y después verifica si el período está activo.
+recuperarBorrador();
 actualizarPeriodo();

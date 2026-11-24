@@ -1,0 +1,95 @@
+/* Estilos de la pantalla RF-13 */
+
+.logo-mep {
+    max-width: 200px;
+    max-height: 55px;
+    width: auto;
+    height: auto;
+}
+
+.navbar-brand {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+    color: #000000;
+}
+
+main h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.card {
+    border-radius: 5px;
+    border-color: #D6D6D6;
+}
+
+.card-header {
+    background-color: #F7F7F7;
+    padding: 10px 15px;
+}
+
+.card-body {
+    padding: 16px;
+}
+
+.texto-ayuda {
+    font-size: 0.8125rem;
+    color: #5F6B7A;
+}
+
+.table {
+    margin-bottom: 10px;
+}
+
+.table th {
+    font-weight: 600;
+    color: #1F2933;
+}
+
+.estado-recibido {
+    background-color: #E1F5FE;
+    color: #0277BD;
+}
+
+.estado-observaciones {
+    background-color: #FFF3E0;
+    color: #B45309;
+}
+
+.estado-aprobado {
+    background-color: #E8F5E9;
+    color: #2E7D32;
+}
+
+.estado-etiqueta {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+#detalle-censo {
+    margin-top: 20px;
+}
+
+#detalle-observaciones {
+    margin-top: 20px;
+}
+
+@media (max-width: 576px) {
+    .navbar-brand {
+        font-size: 0.85rem;
+    }
+
+    .logo-mep {
+        max-width: 110px;
+        max-height: 40px;
+    }
+
+    main {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+}
