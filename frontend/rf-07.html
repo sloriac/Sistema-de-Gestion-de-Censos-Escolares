@@ -23,11 +23,11 @@
                     </figure>
                 </div>
                 <div>
-                    <h1 class="navbar-brand"> SICEN | Seguimiento de Censos</h1>
+                    <h1 class="navbar-brand">Seguimiento de Censos</h1>
                 </div>
                 <div class="d-flex align-items-center gap-3">
-                    <a href="#/inicio" class="nav-link">Inicio</a>
                     <span class="badge rol-tecnico">Técnico de la DAE</span>
+                    <a href="#/inicio" class="btn btn-primary">Inicio</a>
                 </div>
             </nav>
         </div>
@@ -44,14 +44,16 @@
                         <a href="#/censos" class="list-group-item list-group-item-action" data-vista="censos">Censos</a>
                         <a href="#/reportes" class="list-group-item list-group-item-action" data-vista="reportes">Reportes</a>
                     </nav>
-                    <button type="button" class="btn btn-link text-decoration-none mt-3 px-0" id="btn-cerrar-sesion">Cerrar sesión</button>
+                    <div class="d-grid mt-3">
+                        <button type="button" class="btn btn-outline-secondary" id="btn-cerrar-sesion">Cerrar sesión</button>
+                    </div>
                 </aside>
 
                 <div class="col-12 col-md-9 col-lg-10">
 
                     <!--VISTA 1: Inicio (resumen de centros asignados)-->
                     <section id="vista-inicio" class="vista" hidden>
-                        <h2 class="mb-3">Centros asignados</h2>
+                        <h2 class="fs-4 mb-3">Centros asignados</h2>
                         <div class="card col-lg-8">
                             <div class="card-body">
                                 <ul class="list-group list-group-flush mb-3">
@@ -78,8 +80,10 @@
                                     <div class="progress-bar" id="barra-general">0%</div>
                                 </div>
 
-                                <div class="text-center mt-4">
-                                    <a href="#/censos" class="btn btn-primary">Ver centros</a>
+                                <div class="row g-3 mt-2">
+                                    <div class="col-12 col-md-auto d-grid d-md-block">
+                                        <a href="#/censos" class="btn btn-primary">Ver centros</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -87,29 +91,25 @@
 
                     <!--VISTA 2: Censos asignados-->
                     <section id="vista-censos" class="vista" hidden>
-                        <h2 class="mb-3">Censos asignados</h2>
+                        <h2 class="fs-4 mb-3">Censos asignados</h2>
                         <div class="card">
                             <div class="card-body">
 
-                                <div class="row g-2 align-items-center mb-3">
-                                    <div class="col-auto">
-                                        <label for="buscador" class="col-form-label">Buscar centro:</label>
-                                    </div>
-                                    <div class="col">
+                                <div class="row g-3 align-items-end mb-3">
+                                    <div class="col-12 col-md-8">
+                                        <label for="buscador" class="form-label">Buscar centro</label>
                                         <input type="search" class="form-control" id="buscador" placeholder="Nombre o código del centro">
                                     </div>
-                                    <div class="col-auto">
-                                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#panel-filtros"
+                                    <div class="col-12 col-md-auto d-grid d-md-block">
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#panel-filtros"
                                         aria-expanded="false" aria-controls="panel-filtros">Filtros</button>
                                     </div>
                                 </div>
 
                                 <div class="collapse" id="panel-filtros">
-                                    <div class="row g-2 align-items-center mb-3 p-3 bg-light rounded">
-                                        <div class="col-auto">
-                                            <label for="filtro-estado" class="col-form-label">Estado del censo</label>
-                                        </div>
-                                        <div class="col-12 col-sm-4">
+                                    <div class="row g-3 align-items-end mb-3 p-3 bg-light rounded">
+                                        <div class="col-12 col-md-4">
+                                            <label for="filtro-estado" class="form-label">Estado del censo</label>
                                             <select class="form-select" id="filtro-estado">
                                                 <option value="todos">Todos</option>
                                                 <option value="pendiente">Pendiente</option>
@@ -117,7 +117,7 @@
                                                 <option value="completado">Completado</option>
                                             </select>
                                         </div>
-                                        <div class="col-auto">
+                                        <div class="col-12 col-md-auto d-grid d-md-block">
                                             <button type="button" class="btn btn-outline-secondary" id="btn-limpiar-filtros">Limpiar</button>
                                         </div>
                                     </div>
@@ -138,25 +138,33 @@
                                     <p class="text-center text-secondary py-4 mb-0" id="sin-resultados" hidden>No hay censos que coincidan con la búsqueda.</p>
                                 </div>
 
-                                <p class="nota mt-3 mb-0">
-                                    <span id="contador-resultados"></span>
-                                    · <button type="button" class="btn btn-link btn-sm p-0 align-baseline" id="btn-demo-no-asignado">Demo: intentar aprobar un centro NO asignado</button>
-                                    · <button type="button" class="btn btn-link btn-sm p-0 align-baseline" id="btn-reiniciar">Reiniciar datos de prueba</button>
-                                </p>
+                                <div class="row g-3 mt-1 align-items-center">
+                                    <div class="col-12 col-md">
+                                        <span class="nota" id="contador-resultados"></span>
+                                    </div>
+                                    <div class="col-12 col-md-auto d-grid d-md-block">
+                                        <button type="button" class="btn btn-outline-secondary btn-sm" id="btn-demo-no-asignado">Demo: intentar aprobar un centro NO asignado</button>
+                                    </div>
+                                    <div class="col-12 col-md-auto d-grid d-md-block">
+                                        <button type="button" class="btn btn-outline-secondary btn-sm" id="btn-reiniciar">Reiniciar datos de prueba</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </section>
 
                     <!--VISTA 3: Detalle del centro educativo-->
                     <section id="vista-centro" class="vista" hidden>
-                        <a href="#/censos" class="btn btn-link px-0 mb-2">&larr; Volver a censos asignados</a>
+                        <div class="mb-3">
+                            <a href="#/censos" class="btn btn-primary">&larr; Volver</a>
+                        </div>
 
                         <div class="alert alert-danger" role="alert" id="aviso-no-asignado" hidden>
                             <strong>Acceso no permitido.</strong> El centro educativo solicitado no existe o no está asignado a usted.
                         </div>
 
                         <div id="contenido-centro">
-                            <h2 class="mb-3" id="titulo-centro"></h2>
+                            <h2 class="fs-4 mb-3" id="titulo-centro"></h2>
                             <div class="card">
                                 <div class="card-body">
                                     <div class="detalle-centro d-grid gap-3">
@@ -182,7 +190,7 @@
 
                                         <div class="alerta-rechazo" id="detalle-motivo" hidden></div>
 
-                                        <div>
+                                        <div class="d-grid">
                                             <button type="button" class="btn btn-primary" id="btn-ver-censo">Ver censo</button>
                                         </div>
 
@@ -204,7 +212,7 @@
 
                     <!--Reportes (fuera del alcance del RF-07)-->
                     <section id="vista-reportes" class="vista" hidden>
-                        <h2 class="mb-3">Reportes</h2>
+                        <h2 class="fs-4 mb-3">Reportes</h2>
                         <div class="card">
                             <div class="card-body">
                                 <p class="nota mb-0">Este módulo no forma parte del avance del RF-07.</p>
@@ -230,7 +238,7 @@
                     <div class="mb-3">
                         <label for="motivo-rechazo" class="form-label">Motivo del rechazo</label>
                         <textarea class="form-control" id="motivo-rechazo" rows="4" maxlength="500" placeholder="Indique al director qué debe corregir" aria-describedby="error-motivo-rechazo"></textarea>
-                        <div class="invalid-feedback" id="error-motivo-rechazo"></div>
+                        <p class="invalid-feedback" id="error-motivo-rechazo"></p>
                         <div class="text-end texto-ayuda nota" id="contador-motivo">0 / 500</div>
                     </div>
                 </div>
@@ -274,7 +282,7 @@
                     <ul class="list-group" id="lista-secciones-censo"></ul>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
