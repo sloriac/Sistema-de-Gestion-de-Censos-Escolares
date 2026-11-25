@@ -5,7 +5,7 @@ import {HydratedDocument} from 'mongoose';
 export class CentrosEducativos{
     @Prop({required: true, trim: true})
     nombre: string
-    @Prop({required: })
+    @Prop({required: true})
     codigo: string
     @Prop()
     tipo: string

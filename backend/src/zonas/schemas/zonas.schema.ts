@@ -1,14 +1,14 @@
 import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
 import {HydratedDocument} from 'mongoose';
-export type ZonasDocument = HydratedDocument<zonas>;
+export type ZonasDocument = HydratedDocument<Zonas>;
 
 @Schema()
-export class zonas{
+export class Zonas{
     @Prop({required:true, trim: true})
-    nombre: String 
+    nombre: string 
     
     @Prop({required:true, trim:true})
-    region: String
+    region: string
 }
 
-export const zonasSchema = SchemaFactory.createForClass(zonas);
+export const ZonasSchema = SchemaFactory.createForClass(Zonas);

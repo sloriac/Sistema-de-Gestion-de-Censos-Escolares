@@ -2,11 +2,11 @@ import { Module } from '@nestjs/common';
 import { ZonasService } from './zonas.service';
 import { ZonasController } from './zonas.controller';
 import { MongooseModule } from '@nestjs/mongoose';
-import { zonas, zonasSchema } from './schemas/zonas.schema';
+import { Zonas, ZonasSchema } from './schemas/zonas.schema';
 
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: zonas.name, schema: zonasSchema}])],
+  imports: [MongooseModule.forFeature([{ name: Zonas.name, schema: ZonasSchema}])],
   controllers: [ZonasController],
   providers: [ZonasService],
 })

@@ -8,6 +8,7 @@ async function bootstrap() {
   setServers(['1.1.1.1', '8.8.8.8']);
  
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('api');
  
   // Permite la comunicación entre dominios diferentes
   app.enableCors();
