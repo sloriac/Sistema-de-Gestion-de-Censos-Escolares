@@ -2,7 +2,7 @@ import { Type } from 'class-transformer';
 import { IsArray, IsMongoId, IsOptional, ValidateNested } from 'class-validator';
 import { RespuestaDto } from './respuesta.dto';
 
-export class CrearCensoscentroDto {
+export class CrearCensosCentroDto {
     @IsMongoId({message: 'El censo no es valido'})
     censoId: string;
 

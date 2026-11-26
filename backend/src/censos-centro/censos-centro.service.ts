@@ -4,7 +4,6 @@ import { isValidObjectId, Model } from 'mongoose';
 import { CensosCentro, CensosCentroDocument } from './schemas/censos-centro.schema';
 import { CrearCensosCentroDto } from './dto/crear-censos-centro.dto';
 import { ActualizarCensosCentroDto } from './dto/actualizar-censos-centro.dto';
-import { throwError } from 'rxjs';
 
 @Injectable()
 export class CensosCentroService {
