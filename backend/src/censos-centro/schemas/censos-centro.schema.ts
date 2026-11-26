@@ -50,7 +50,7 @@ export class CensosCentro {
     @Prop({required: true, default: Date.now})
     ultimaModificacion: Date;
     @Prop({type: MongooseSchema.Types.ObjectId, ref: Usuarios.name})
-    eviadoPor?: Types.ObjectId;
+    enviadoPor?: Types.ObjectId;
     @Prop({type: [ObservacionSchema], default: []})
     observaciones: Observacion[];
 }
@@ -58,4 +58,4 @@ export class CensosCentro {
 export const CensosCentroSchema = SchemaFactory.createForClass(CensosCentro);
 
 //un unico censo por centro
-CensosCentroSchema.index({censoId: 1, CentrosEducativoId: 1}, {unique: true});
+CensosCentroSchema.index({censoId: 1, centroEducativoId: 1}, {unique: true});
