@@ -8,6 +8,7 @@ import { CensosModule } from './censos/censos.module';
 import { CensosCentroModule } from './censos-centro/censos-centro.module';
 import { InconsistenciasModule } from './inconsistencias/inconsistencias.module';
 import { ZonasModule } from './zonas/zonas.module';
+import { AuthModule } from './auth/auth.module';
  
 @Module({
   imports: [
@@ -21,6 +22,8 @@ import { ZonasModule } from './zonas/zonas.module';
         uri: config.get<string>('MONGODB_URI'),
       }),
     }),
+
+    AuthModule,
  
     CentrosEducativosModule,
     
