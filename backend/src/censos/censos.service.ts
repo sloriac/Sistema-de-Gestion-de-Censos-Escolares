@@ -4,17 +4,24 @@ import { Censos } from './schemas/censos.schema';
 import { isValidObjectId, Model } from 'mongoose';
 import { CrearCensosDto } from './dto/crear-censos.dto';
 import { ActualizarCensosDto } from './dto/actualizar-censos.dto';
+import { EstadoFormulario, FormulariosCensales } from '../formularios-censales/schemas/formularios-censales.schema';
 
 @Injectable()
 export class CensosService {
     //Inyecciondel modelo
-    constructor(@InjectModel(Censos.name) private readonly censosModel: Model<Censos>) {}
+     constructor(
+        @InjectModel(Censos.name) private readonly censosModel: Model<Censos>,
+        @InjectModel(FormulariosCensales.name) private readonly formulariosModel: Model<FormulariosCensales>,
+    ) {}
 
     //Metodos CRUD
 
     //C - CREATE
     async crear(dto: CrearCensosDto) {
         this.validarFechas(dto.fechaApertura, dto.fechaCierre);
+          const formulario = await this.formulariosModel.findById(dto.formularioId);
+        if (!formulario) throw new NotFoundException('El formulario no existe');
+        if (formulario.estado !== EstadoFormulario.aprobado) {throw new BadRequestException('Solo se puede crear un censo con un formulario aprobado');}
         return this.censosModel.create(dto);
     }
 
