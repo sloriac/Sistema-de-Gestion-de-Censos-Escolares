@@ -18,7 +18,7 @@ export class CrearUsuariosDto {
     @IsNotEmpty({message: 'La contraseña no puede estar vacía'})    
     contrasena: string;
 
-    @IsIn([RolUsuario.tecnicoDae, RolUsuario.supervisor], {message: 'El rol puede ser únicamente Técnico DAE o Supervisor'})
+    @IsIn([RolUsuario.tecnicoDae, RolUsuario.supervisor, RolUsuario.director], {message: 'El rol puede ser únicamente Técnico DAE, Supervisor o Director'})
     rol: RolUsuario;
 
     @IsOptional()
